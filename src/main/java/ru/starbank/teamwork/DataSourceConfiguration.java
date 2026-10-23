@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfiguration {
     @Bean
-    public DataSource DataSource(
+    public DataSource recommendationsDataSource(
             @Value("${application.recommendations-db.url}") String url) {
 
         HikariDataSource dataSource = new HikariDataSource();
@@ -24,8 +24,8 @@ public class DataSourceConfiguration {
     }
 
     @Bean
-    public JdbcTemplate JdbcTemplate(
-            @Qualifier("DataSource") DataSource dataSource) {
+    public JdbcTemplate recommendationsJdbcTemplate(
+            @Qualifier("recommendationsDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }
